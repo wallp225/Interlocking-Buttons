@@ -8,19 +8,19 @@ public class Click : MonoBehaviour
 
     public GameObject switch1;
     public GameObject switch2;
+    
     public float moveValue = 0.15f; // value to move button by
     public float upPos = 0.3f;      // default button position
-    Vector3 tempPos;
+    
     public bool switchPressed;
 
+    Vector3 tempPos;
+    
     // Start is called before the first frame update
     void Start()
     {
         switch1 = GameObject.FindWithTag("Switch1");
         switch2 = GameObject.FindWithTag("Switch2");
-
-        Debug.Log("thisSwitch = " + switch1.name);
-        Debug.Log("otherSwitch = " + switch2.name);
 
         tempPos = transform.position;
     }
@@ -31,20 +31,41 @@ public class Click : MonoBehaviour
         
     }
 
+    // Handles the user clicking a button.
     private void OnMouseDown()
     {
-        if(tempPos.y < upPos)
+        // if the button clicked was switch1
+        if (gameObject == switch1)
         {
-            Debug.Log("Button Up");
+            // if switch2 hasn't been pressed
+            if (switch2.GetComponent<Click>().switchPressed == false)
+            {
+                MoveButton();
+            }
+        }
+        else
+        {
+            // if switch1 hasn't been pressed
+            if (switch1.GetComponent<Click>().switchPressed == false)
+            {
+                MoveButton();
+            }
+        }
+        transform.position = tempPos;
+    }
+
+    // moves the button within the program
+    private void MoveButton()
+    {
+        if (tempPos.y < upPos)
+        {
             tempPos.y += moveValue;
             switchPressed = false;
-        } else {
-            Debug.Log("Button Down");
+        }
+        else
+        {
             tempPos.y += -moveValue;
             switchPressed = true;
         }
-        transform.position = tempPos;
-        Debug.Log("switch1 pressed? " + switch1.GetComponent<Click>().switchPressed);
-        Debug.Log("switch2 pressed? " + switch2.GetComponent<Click>().switchPressed);
     }
 }
