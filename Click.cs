@@ -8,9 +8,12 @@ public class Click : MonoBehaviour
 
     public GameObject switch1;
     public GameObject switch2;
+    
     public float moveValue = 0.15f; // value to move button by
     public float upPos = 0.3f;      // default button position
+    
     Vector3 tempPos;
+    
     public bool switchPressed;
 
     // Start is called before the first frame update
@@ -18,9 +21,6 @@ public class Click : MonoBehaviour
     {
         switch1 = GameObject.FindWithTag("Switch1");
         switch2 = GameObject.FindWithTag("Switch2");
-
-        Debug.Log("thisSwitch = " + switch1.name);
-        Debug.Log("otherSwitch = " + switch2.name);
 
         tempPos = transform.position;
     }
